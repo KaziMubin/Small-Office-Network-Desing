@@ -18,7 +18,7 @@ ip domain-name Marketing_&_RnD
 crypto key generate rsa
 1024
 ip ssh version 2
-username itmanager password                     markrd156/salpro178/adhrac123
+username itmanager password  markrd156/salpro178/adhrac123
 line vty 0 15
 transport input ssh
 login local
@@ -30,10 +30,9 @@ vlan 60/80/30
 exit
 copy running start
 
-
 #################### Vlan & vtp #####################
 en
-markrd156
+markrd156/salpro178/adhrac123
 conf t
 int f0/2
 switchport mode access
@@ -41,7 +40,7 @@ switchport access vlan 10
 
 int range f0/3-4
 switchport mode access
-switchport access vlan 50
+switchport access vlan 50/70/20
 
 int f0/5
 switchport mode access
@@ -49,45 +48,33 @@ switchport access vlan 10
 
 int range f0/6-7
 switchport mode access
-switchport access vlan 60
-################ sales & production ############
-en
-salpro178
-conf t
-int f0/2
-switchport mode access
-switchport access vlan 10
+switchport access vlan 60/80/30
 
-int range f0/3-4
-switchport mode access
-switchport access vlan 70
+int vlan 10
+ip address 192.168.20.1 255.255.255.224
+no shut
+int vlan 20
+ip address 192.168.20.33 255.255.255.224
+no shut
+int vlan 30
+ip address 192.168.20.65 255.255.255.224
+no shut
+int vlan 50
+ip address 192.168.20.97 255.255.255.224
+no shut
+int vlan 60
+ip address 192.168.20.129 255.255.255.224
+no shut
+int vlan 70
+ip address 192.168.20.161 255.255.255.224
+no shut
+int vlan 80
+ip address 192.168.20.193 255.255.255.224
+no shut
+int vlan 1
+ip address 192.168.20.225 255.255.255.224
+no shut
 
-int f0/5
-switchport mode access
-switchport access vlan 10
-
-int range f0/6-7
-switchport mode access
-switchport access vlan 80
-################ admin hr ac ############
-en
-adhrac123
-conf t
-int range f0/2-4
-switchport mode access
-switchport access vlan 10
-
-int f0/6
-switchport mode access
-switchport access vlan 10
-
-int f0/5
-switchport mode access
-switchport access vlan 20
-
-int f0/7
-switchport mode access
-switchport access vlan 30
 ######################## vlan allowed ##########
 int f0/1
 switchport mode trunk
@@ -149,20 +136,101 @@ vtp mode server
 vtp domain abcd_co.
 vtp password a1b2c3d4
 
-################### ACL #####################
-
-
-
+int vlan 10
+ip address 192.168.20.1 255.255.255.224
+no shut
+int vlan 20
+ip address 192.168.20.33 255.255.255.224
+no shut
+int vlan 30
+ip address 192.168.20.65 255.255.255.224
+no shut
+int vlan 50
+ip address 192.168.20.97 255.255.255.224
+no shut
+int vlan 60
+ip address 192.168.20.129 255.255.255.224
+no shut
+int vlan 70
+ip address 192.168.20.161 255.255.255.224
+no shut
+int vlan 80
+ip address 192.168.20.193 255.255.255.224
+no shut
+int vlan 1
+ip address 192.168.20.225 255.255.255.224
+no shut
 
 ################### Security #####################
 
 
 
 
-################### Router #####################
-
-
-
-
 
 ################### IP #####################
+
+
+
+
+
+
+################### Router #####################
+en
+conf t
+hostname Company_router
+enable secret com1234
+line vty 0
+password com1234
+login
+line vty 1 15
+no password
+login
+exit
+line console 0
+password com1234
+login
+exit
+ip domain-name ABC_co.
+crypto key generate rsa
+1024
+ip ssh version 2
+username itmanager password com1234
+line vty 0 15
+transport input ssh
+login local
+exit
+
+exit
+copy running start
+
+int vlan 10
+ip address 192.168.20.1 255.255.255.224
+no shut
+int vlan 20
+ip address 192.168.20.33 255.255.255.224
+no shut
+int vlan 30
+ip address 192.168.20.65 255.255.255.224
+no shut
+int vlan 50
+ip address 192.168.20.97 255.255.255.224
+no shut
+int vlan 60
+ip address 192.168.20.129 255.255.255.224
+no shut
+int vlan 70
+ip address 192.168.20.161 255.255.255.224
+no shut
+int vlan 80
+ip address 192.168.20.193 255.255.255.224
+no shut
+int vlan 1
+ip address 192.168.20.225 255.255.255.224
+no shut
+
+################### ACL #####################
+
+
+
+
+
